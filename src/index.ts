@@ -1,12 +1,12 @@
 import express from "express";
-import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 const app = express();
+app.use(express.json());
 
 app.post("/api/v1/signup",(req, res)=>{
     const username=req.body.username;
     const password=req.body.passowrd;
-
+    try{
     await UserModel.create({
         username:username,
         passsword:password
@@ -14,6 +14,11 @@ app.post("/api/v1/signup",(req, res)=>{
     res.json({
         message:"User signed up"
     })
+}catch(e){
+    res.status(411).json({
+        message:"User already exists"
+    })
+}
 
 })
 app.post("/api/v1/signin",(req, res)=>{
