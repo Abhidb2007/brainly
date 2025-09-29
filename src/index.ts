@@ -4,6 +4,16 @@ import jwt from "jsonwebtoken";
 const app = express();
 
 app.post("/api/v1/signup",(req, res)=>{
+    const username=req.body.username;
+    const password=req.body.passowrd;
+
+    await UserModel.create({
+        username:username,
+        passsword:password
+    })
+    res.json({
+        message:"User signed up"
+    })
 
 })
 app.post("/api/v1/signin",(req, res)=>{
