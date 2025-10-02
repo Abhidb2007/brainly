@@ -26,7 +26,7 @@ app.post("/api/v1/signin",(req, res)=>{
     const password=req.body.password;
     const existingUser = await UserModel.findOne({
         username,
-        password
+        password,
     })
     if(existingUser){
         const token=jwt.sign({
